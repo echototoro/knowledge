@@ -1264,23 +1264,31 @@ todo: chrome如何查内存和内存泄漏，Node.js如何查隐蔽的内存泄�
 
     ```javascript
     try {
-      Promise.resolve().then(() => { 错误 }) // 异步的无法捕获，错误会向全局抛
+      Promise.resolve().then(() => { 错误 })  // 异步的无法捕获，错误会向全局抛
     } catch (e) {}
 
 
-    new Promise((resolve, reject) => {
-      Promise.resolve().then(() => { 错误 }) // 异步的无法捕获，错误会向全局抛
-    })
+    try {
+      new Promise((resolve, reject) => {
+        错误                                  // 异步的无法捕获，错误会向全局抛
+      })
+    } catch (e) {}
 
 
     async function func1 () {
-      Promise.resolve().then(() => { 错误 }) // 异步的无法捕获，错误会向全局抛
+      错误
     }
+    try {
+      func1()                                 // 异步的无法捕获，错误会向全局抛
+    } catch (e) {}
 
 
     async function func2 () {
-      await Promise.resolve().then(() => { 错误 }) // 可以捕获
+      try {
+        await Promise.resolve().then(() => { 错误 })  // 可以捕获
+      } catch (e) {}
     }
+    func2()
     ```
 
     - 解决办法：可以在异步回调内部再包一层`try-catch`。
@@ -2064,6 +2072,7 @@ todo: chrome如何查内存和内存泄漏，Node.js如何查隐蔽的内存泄�
         3. 若没有`catch`，`try`中的代码抛出错误后，则先执行`finally`中的语句，然后将`try`中抛出的错误往上抛。
         4. 若`try`中代码是以`return`、`continue`或`break`终止的，则必须先执行完`finally`中的语句后再执行相应的`try`中的返回语句。
         5. 在`catch`中接收的错误，不会再向上提交给浏览器。
+        - `try-catch`能捕获其中所有同步代码，同步调用外部的方法也包含。
 
         >`try { setTimeout(() => { 错误 }, 0) } catch (e) {}`不会捕获异步操作中的错误（同理，在`Promise`或`async-await`等语法中的异步错误也无法被捕获，但可以捕获`await`的`reject`）。可以在异步回调内部再包一层`try-catch`、或用`window`的`error`事件捕获。
     2. `window`的`error`事件
