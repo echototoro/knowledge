@@ -2747,6 +2747,7 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
     5. `compose(...functions)`
 
         >e.g. `createStore(reducer, compose(applyMiddleware(thunk), DevTools.instrument()))`
+5. [redux风格指南](https://redux.js.org/style-guide)
 
 #### redux工具
 1. 与React配合使用：[react-redux](https://github.com/reduxjs/react-redux)
