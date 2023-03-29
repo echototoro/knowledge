@@ -2959,9 +2959,12 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
     1. `configureStore`
 
         包装`createStore`以提供简化的配置选项和良好的默认预设。自动组合切片的reducer，添加你提供的任何Redux中间件。
-
+    ><details>
+    ><summary>e.g.</summary>
         >1. 默认启用了`redux-thunk`中间件；默认启用`redux-devtools`扩展。
-        >2. 中间件默认开启序列化检查
+        >2. <details>
+        >
+        >    <summary>中间件默认开启序列化检查</summary>
         >
         >    ```javascript
         >    export default configureStore({
@@ -2974,6 +2977,7 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
         >      },
         >    });
         >    ```
+        >    </details>
     2. `createReducer`
 
         生成reducer。
