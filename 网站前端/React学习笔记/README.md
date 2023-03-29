@@ -2747,6 +2747,7 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
     5. `compose(...functions)`
 
         >e.g. `createStore(reducer, compose(applyMiddleware(thunk), DevTools.instrument()))`
+5. [redux风格指南](https://redux.js.org/style-guide)
 
 #### redux工具
 1. 与React配合使用：[react-redux](https://github.com/reduxjs/react-redux)
@@ -2960,7 +2961,25 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
 
         包装`createStore`以提供简化的配置选项和良好的默认预设。自动组合切片的reducer，添加你提供的任何Redux中间件。
 
-        >默认启用了`redux-thunk`中间件；默认启用`redux-devtools`扩展。
+        >1. 默认启用了`redux-thunk`中间件；默认启用`redux-devtools`扩展。
+        >2. <details>
+        >
+        >    <summary>中间件默认开启序列化检查</summary>
+        >
+        >    >[原因](https://redux.js.org/style-guide#do-not-put-non-serializable-values-in-state-or-actions)。
+        >
+        >    ```javascript
+        >    export default configureStore({
+        >      reducer: rootReducer,
+        >      middleware: (getDefaultMiddleware) => {
+        >        return getDefaultMiddleware({
+        >          // 关闭序列化检查
+        >          serializableCheck: false,
+        >        });
+        >      },
+        >    });
+        >    ```
+        >    </details>
     2. `createReducer`
 
         生成reducer。

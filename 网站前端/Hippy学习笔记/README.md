@@ -1072,11 +1072,10 @@
                     ```jsx
                     <View>
                       <View style={{ flexShrink:1}}>
-                        <Text style={{ flex: 1 }}>
+                        <Text style={{ flex: 1 }}>  // 也可以是<ScrollView>等 会变化的内容
                           自适应的内容
                         </Text>
                       </View>
-
 
                       <View>固定内容</View>
                     </View>
