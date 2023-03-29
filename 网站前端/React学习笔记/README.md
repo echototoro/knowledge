@@ -2966,6 +2966,8 @@ Web应用是一个状态机，视图与状态是一一对应的。让state的变
         >
         >    <summary>中间件默认开启序列化检查</summary>
         >
+        >    >[原因](https://redux.js.org/style-guide#do-not-put-non-serializable-values-in-state-or-actions)。
+        >
         >    ```javascript
         >    export default configureStore({
         >      reducer: rootReducer,
