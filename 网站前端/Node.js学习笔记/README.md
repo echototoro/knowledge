@@ -648,7 +648,7 @@ npm（Node Package Manager）。
             3. 将 X 当成**目录**，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行。
 
                 `X/package.json（main字段）`、`X/index.js`、`X/index.json`、`X/index.node`
-        2. 若 X 是核心模块（内置），则返回该模块，不再继续执行。
+        2. 若 X 是核心模块（内置模块），则返回该模块，不再继续执行。
 
             >e.g. `require('http')`
 
@@ -729,7 +729,7 @@ npm（Node Package Manager）。
     >
     >1. 使用正则表达式时注意ReDoS（Regular expression Denial of Service，正则表达式拒绝服务攻击）风险。
     >2. `JSON.parse/stringify`随着输入参数线性增加执行时间。
-2. 解析后的代码，（通过Node.js的Bindings）调用Node.js的API，与操作系统进行交互。
+2. 解析后的代码，调用Node.js的API，（通过Node.js内置模块与C/C++的internalBinding）与操作系统进行交互。
 3. [libuv](https://github.com/libuv/libuv)负责Node.js的API的执行。将不同的任务分配给不同的线程，形成一个[Event Loop（事件循环）](https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/)，以异步的方式将任务的执行结果返回给V8引擎。
 4. V8引擎再将结果返回给应用程序。
 
@@ -807,7 +807,7 @@ npm（Node Package Manager）。
 >只有打通和后端技术的桥梁、实现互联互通，Node.js才能在公司业务中有更长远的发展。
 
 ### Node.js[核心模块](http://nodejs.cn/api/)（需要`require`引入）
->核心模块定义在[源代码的lib/文件](https://github.com/nodejs/node/tree/main/lib/)。同名加载时，核心模块优先级高于路径加载或自定义模块。
+>核心模块/内置模块 定义在[源代码的lib/文件](https://github.com/nodejs/node/tree/main/lib/)。同名加载时，核心模块优先级高于路径加载或自定义模块。
 
 1. `http`：HTTP请求相关API
 
