@@ -729,7 +729,9 @@ npm（Node Package Manager）。
     >
     >1. 使用正则表达式时注意ReDoS（Regular expression Denial of Service，正则表达式拒绝服务攻击）风险。
     >2. `JSON.parse/stringify`随着输入参数线性增加执行时间。
-2. 解析后的代码，调用Node.js的API，（通过Node.js内置模块与C/C++的internalBinding）与操作系统进行交互。
+2. 解析后的代码，调用Node.js的API，与操作系统进行交互。
+
+    Node.js内置模块 -> V8（internalBinding） -> C/C++ -> 操作系统
 3. [libuv](https://github.com/libuv/libuv)负责Node.js的API的执行。将不同的任务分配给不同的线程，形成一个[Event Loop（事件循环）](https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/)，以异步的方式将任务的执行结果返回给V8引擎。
 4. V8引擎再将结果返回给应用程序。
 
